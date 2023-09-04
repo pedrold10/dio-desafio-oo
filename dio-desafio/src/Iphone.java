@@ -1,10 +1,21 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.UUID;
 
-public class Iphone implements Reprodutor, Aparelho{
+public class Iphone implements Reprodutor, Aparelho, Navegador{
     private String musica;
     private String numero;
+
+    private List<Pagina> abas = new ArrayList<>();
+
+    public List<Pagina> getPaginas() {
+        return abas;
+    }
+
+    public void setPaginas(List<Pagina> paginas) {
+        this.abas = paginas;
+    }
 
     public Iphone(){
         Random random = new Random();
@@ -71,6 +82,40 @@ public class Iphone implements Reprodutor, Aparelho{
     public void iniciarCorreioVoz() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'iniciarCorreioVoz'");
+    }
+
+    @Override
+    public void exibirPagina() {
+        int contador = 0;
+        Scanner scanner = new Scanner(System.in);
+        for(Pagina pagina : abas){
+            contador++;
+            System.out.println("Página "+ contador + pagina.getEndereco());
+        }
+        System.out.println("Escolha em qual aba você quer navegar: ");
+        scanner.nextInt();
+    }
+
+    @Override
+    public void adicionarNovaAba() {
+        Scanner scanner = new Scanner(System.in);
+        String endereco = scanner.nextLine();
+        Pagina pagina = new Pagina(endereco);
+        abas.add(pagina);
+        System.out.println("Número de abas: " + abas.size());
+        
+    }
+
+    @Override
+    public void atualizarPagina() {
+        int contador = 0;
+        Scanner scanner = new Scanner(System.in);
+        for(Pagina pagina : abas){
+            contador++;
+            System.out.println("Página "+ contador + pagina.getEndereco());
+        }
+        System.out.println("Escolha qual aba você quer atualizar: ");
+        scanner.nextInt();
     }
     
     
